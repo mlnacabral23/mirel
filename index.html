@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mirel Private Travel | Experiencias de Lujo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Lato', 'sans-serif'],
+                    },
+                    colors: {
+                        'mirel-red': '#8B1E28', /* Tono inspirado en la imagen subida pero oscurecido para elegancia */
+                        'mirel-gold': '#D4AF37',
+                        'mirel-dark': '#1a1a1a',
+                        'mirel-light': '#f9f9f9'
+                    },
+                    backgroundImage: {
+                        'hero-pattern': "linear-gradient(to right bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.2)), url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=2070&auto=format&fit=crop')",
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Custom underline animation */
+        .hover-underline-animation {
+            display: inline-block;
+            position: relative;
+        }
+        .hover-underline-animation::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: white;
+            transform-origin: bottom right;
+            transition: transform 0.25s ease-out;
+        }
+        .hover-underline-animation:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+    </style>
+</head>
+<body class="font-sans text-mirel-dark bg-mirel-light antialiased">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-6 px-8 lg:px-16 text-white flex justify-between items-center bg-transparent backdrop-blur-sm">
+        <!-- Logo -->
+        <a href="#" class="text-3xl font-serif tracking-widest flex items-center gap-2">
+            <span class="font-bold italic text-mirel-red drop-shadow-md">M</span>IREL
+        </a>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex gap-10 text-sm tracking-widest font-light uppercase">
+            <a href="#destinos" class="hover:text-mirel-gold transition-colors">Destinos</a>
+            <a href="#experiencias" class="hover:text-mirel-gold transition-colors">Experiencias</a>
+            <a href="#concierge" class="hover:text-mirel-gold transition-colors">Concierge</a>
+            <a href="#nosotros" class="hover:text-mirel-gold transition-colors">La Firma</a>
+        </div>
+
+        <!-- CTA Button -->
+        <div class="hidden md:block">
+            <a href="#contacto" class="border border-white/30 px-6 py-2 text-xs uppercase tracking-widest hover:bg-white hover:text-mirel-dark transition-all duration-300">
+                Planificar Viaje
+            </a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn" class="md:hidden text-white">
+            <i data-lucide="menu" class="w-8 h-8"></i>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 bg-mirel-dark z-40 transform translate-x-full transition-transform duration-300 flex flex-col justify-center items-center gap-8 text-white">
+        <button id="close-menu-btn" class="absolute top-6 right-8">
+            <i data-lucide="x" class="w-8 h-8"></i>
+        </button>
+        <a href="#destinos" class="text-2xl font-serif italic" onclick="toggleMenu()">Destinos</a>
+        <a href="#experiencias" class="text-2xl font-serif italic" onclick="toggleMenu()">Experiencias</a>
+        <a href="#concierge" class="text-2xl font-serif italic" onclick="toggleMenu()">Concierge</a>
+        <a href="#contacto" class="text-2xl font-serif italic text-mirel-gold" onclick="toggleMenu()">Contacto</a>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="relative h-screen bg-hero-pattern bg-cover bg-center flex items-center justify-center text-center px-4">
+        <div class="relative z-10 max-w-4xl mx-auto reveal active">
+            <p class="text-sm md:text-base text-white/80 uppercase tracking-[0.3em] mb-4">Luxury Travel Agency</p>
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-serif text-white mb-8 leading-tight">
+                El arte de viajar <br><span class="italic text-white/90">sin límites.</span>
+            </h1>
+            <p class="text-white/70 font-light text-lg mb-12 max-w-2xl mx-auto leading-relaxed">
+                Diseñamos itinerarios a medida para quienes no buscan un destino, sino una transformación.
+            </p>
+            <a href="#destinos" class="inline-block animate-bounce text-white opacity-70 hover:opacity-100 transition-opacity">
+                <i data-lucide="arrow-down" class="w-8 h-8"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- Intro / Philosophy -->
+    <section id="nosotros" class="py-24 px-8 lg:px-32 bg-white text-center">
+        <div class="max-w-3xl mx-auto reveal">
+            <span class="text-mirel-red font-serif italic text-2xl mb-4 block">Mirel Private</span>
+            <h2 class="text-3xl md:text-4xl font-light uppercase tracking-widest mb-8 text-mirel-dark">
+                Más allá de la primera clase
+            </h2>
+            <p class="text-gray-600 font-light leading-8 text-lg">
+                En Mirel, entendemos que el verdadero lujo es la privacidad, la exclusividad y el tiempo. No vendemos boletos; curamos momentos. Desde islas privadas en el Índico hasta expediciones árticas con chefs Michelin, cada viaje es una obra maestra diseñada exclusivamente para usted.
+            </p>
+            <div class="mt-12">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Stylized_signature.svg/1200px-Stylized_signature.svg.png" alt="Signature" class="h-12 mx-auto opacity-40">
+            </div>
+        </div>
+    </section>
+
+    <!-- Destinations Grid -->
+    <section id="destinos" class="py-20 px-4 md:px-8 bg-mirel-light">
+        <div class="flex justify-between items-end mb-12 px-4 max-w-7xl mx-auto">
+            <div>
+                <span class="text-xs uppercase tracking-[0.2em] text-gray-500">Nuestra Colección</span>
+                <h3 class="text-3xl font-serif mt-2 text-mirel-dark">Destinos Curados</h3>
+            </div>
+            <a href="#" class="hidden md:flex items-center gap-2 text-xs uppercase tracking-widest border-b border-black pb-1 hover:text-mirel-red transition-colors">
+                Ver todo el portafolio <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-7xl mx-auto h-auto md:h-[600px]">
+            <!-- Card 1 -->
+            <div class="group relative overflow-hidden h-[400px] md:h-full col-span-1 md:col-span-1 cursor-pointer reveal">
+                <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=1938&auto=format&fit=crop" alt="Bali" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-90"></div>
+                <div class="absolute bottom-8 left-8 text-white">
+                    <p class="text-xs uppercase tracking-widest mb-2">Indonesia</p>
+                    <h4 class="text-3xl font-serif italic">Ubud Retreats</h4>
+                </div>
+            </div>
+
+            <!-- Card 2 (Wide) -->
+            <div class="group relative overflow-hidden h-[400px] md:h-full col-span-1 md:col-span-2 cursor-pointer reveal delay-100">
+                <img src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?q=80&w=2668&auto=format&fit=crop" alt="Maldives" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-90"></div>
+                <div class="absolute bottom-8 left-8 text-white">
+                    <p class="text-xs uppercase tracking-widest mb-2">Maldivas</p>
+                    <h4 class="text-3xl font-serif italic">Atolones Privados</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-7xl mx-auto mt-6 h-auto md:h-[400px]">
+             <!-- Card 3 -->
+             <div class="group relative overflow-hidden h-[400px] md:h-full cursor-pointer reveal">
+                <img src="https://images.unsplash.com/photo-1491557345352-5929e343eb89?q=80&w=2070&auto=format&fit=crop" alt="Europe" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-90"></div>
+                <div class="absolute bottom-8 left-8 text-white">
+                    <p class="text-xs uppercase tracking-widest mb-2">Francia</p>
+                    <h4 class="text-3xl font-serif italic">Riviera Francesa</h4>
+                </div>
+            </div>
+             <!-- Card 4 -->
+             <div class="group relative overflow-hidden h-[400px] md:h-full cursor-pointer reveal delay-100">
+                <img src="https://images.unsplash.com/photo-1548574505-5e239809ee19?q=80&w=2164&auto=format&fit=crop" alt="Safari" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-90"></div>
+                <div class="absolute bottom-8 left-8 text-white">
+                    <p class="text-xs uppercase tracking-widest mb-2">Tanzania</p>
+                    <h4 class="text-3xl font-serif italic">Safari de Lujo</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services / Concierge -->
+    <section id="concierge" class="py-24 bg-mirel-dark text-white">
+        <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div class="reveal">
+                <h3 class="text-4xl md:text-5xl font-serif mb-8 leading-tight">
+                    Servicio <span class="text-mirel-gold italic">White-Glove</span> 24/7.
+                </h3>
+                <p class="text-gray-400 font-light mb-8 text-lg">
+                    Desde el momento en que nos contacta hasta su regreso a casa, nuestro equipo de concierge se encarga de cada detalle. Acceso VIP, jets privados, reservas imposibles y seguridad discreta.
+                </p>
+                <ul class="space-y-6">
+                    <li class="flex items-start gap-4">
+                        <i data-lucide="plane" class="text-mirel-gold mt-1"></i>
+                        <div>
+                            <h5 class="text-lg uppercase tracking-widest">Aviación Privada</h5>
+                            <p class="text-sm text-gray-500 mt-1">Gestión completa de charters y traslados en helicóptero.</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-4">
+                        <i data-lucide="gem" class="text-mirel-gold mt-1"></i>
+                        <div>
+                            <h5 class="text-lg uppercase tracking-widest">Acceso Exclusivo</h5>
+                            <p class="text-sm text-gray-500 mt-1">Visitas privadas a museos, cenas con chefs estrella y eventos cerrados.</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-4">
+                        <i data-lucide="shield-check" class="text-mirel-gold mt-1"></i>
+                        <div>
+                            <h5 class="text-lg uppercase tracking-widest">Seguridad y Privacidad</h5>
+                            <p class="text-sm text-gray-500 mt-1">Protocolos estrictos para perfiles de alto nivel.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="relative h-[600px] reveal delay-200">
+                <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=1994&auto=format&fit=crop" alt="Luxury Jet" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000 ease-in-out">
+                <div class="absolute -bottom-6 -left-6 bg-white p-8 max-w-xs shadow-2xl hidden md:block">
+                    <p class="text-mirel-dark font-serif italic text-xl">"El único límite es su imaginación."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-24 bg-white text-center">
+        <div class="max-w-4xl mx-auto px-8 reveal">
+            <i data-lucide="quote" class="w-12 h-12 text-mirel-red mx-auto mb-6 opacity-20"></i>
+            <h3 class="text-2xl md:text-3xl font-serif italic text-mirel-dark mb-8 leading-relaxed">
+                "Mirel transformó nuestra luna de miel en algo que el dinero normalmente no puede comprar: magia pura y privacidad absoluta. Una atención al detalle impecable."
+            </h3>
+            <p class="text-xs uppercase tracking-[0.2em] text-gray-500 font-bold">Roberto & Elena G.</p>
+            <p class="text-xs text-gray-400 mt-1">Clientes Private Member - Madrid</p>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section id="contacto" class="py-20 px-8 bg-neutral-100">
+        <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16">
+            <div class="reveal">
+                <h2 class="text-4xl font-serif text-mirel-dark mb-6">Comience su viaje</h2>
+                <p class="text-gray-600 font-light mb-8">
+                    Estamos listos para diseñar su próxima experiencia. Complete el formulario y un Travel Designer Senior le contactará en breve.
+                </p>
+                <div class="space-y-4 text-gray-600">
+                    <p class="flex items-center gap-3"><i data-lucide="map-pin" class="w-5 h-5"></i> Polanco, CDMX | Madrid | New York</p>
+                    <p class="flex items-center gap-3"><i data-lucide="phone" class="w-5 h-5"></i> +52 (55) 1234 5678</p>
+                    <p class="flex items-center gap-3"><i data-lucide="mail" class="w-5 h-5"></i> concierge@mireltravel.com</p>
+                </div>
+            </div>
+            <form class="space-y-8 reveal delay-100">
+                <div class="grid grid-cols-2 gap-8">
+                    <div class="group">
+                        <input type="text" placeholder="Nombre" class="w-full bg-transparent border-b border-gray-300 py-3 focus:outline-none focus:border-mirel-dark transition-colors placeholder-gray-400">
+                    </div>
+                    <div class="group">
+                        <input type="text" placeholder="Apellido" class="w-full bg-transparent border-b border-gray-300 py-3 focus:outline-none focus:border-mirel-dark transition-colors placeholder-gray-400">
+                    </div>
+                </div>
+                <div>
+                    <input type="email" placeholder="Correo Electrónico" class="w-full bg-transparent border-b border-gray-300 py-3 focus:outline-none focus:border-mirel-dark transition-colors placeholder-gray-400">
+                </div>
+                <div>
+                    <input type="text" placeholder="Destino de interés" class="w-full bg-transparent border-b border-gray-300 py-3 focus:outline-none focus:border-mirel-dark transition-colors placeholder-gray-400">
+                </div>
+                <div>
+                    <textarea rows="3" placeholder="Detalles o requerimientos especiales" class="w-full bg-transparent border-b border-gray-300 py-3 focus:outline-none focus:border-mirel-dark transition-colors placeholder-gray-400"></textarea>
+                </div>
+                <button type="button" class="bg-mirel-dark text-white px-10 py-4 text-xs uppercase tracking-widest hover:bg-mirel-red transition-colors duration-300 w-full md:w-auto">
+                    Solicitar Consulta
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-16 border-t border-gray-900">
+        <div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="text-center md:text-left">
+                <h2 class="text-3xl font-serif italic mb-2">Mirel</h2>
+                <p class="text-xs text-gray-500 tracking-widest uppercase">Private Travel Agency</p>
+            </div>
+            
+            <div class="flex gap-8 text-sm text-gray-400">
+                <a href="#" class="hover:text-white transition-colors">Instagram</a>
+                <a href="#" class="hover:text-white transition-colors">LinkedIn</a>
+                <a href="#" class="hover:text-white transition-colors">Facebook</a>
+            </div>
+
+            <div class="text-xs text-gray-600 text-center md:text-right">
+                <p>&copy; 2024 Mirel Travel Group. Todos los derechos reservados.</p>
+                <div class="flex gap-4 mt-2 justify-center md:justify-end">
+                    <a href="#" class="hover:text-gray-400">Privacidad</a>
+                    <a href="#" class="hover:text-gray-400">Términos</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        // Icon Initialization
+        lucide.createIcons();
+
+        // Navbar Transition on Scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-black/90', 'shadow-lg', 'py-4');
+                navbar.classList.remove('bg-transparent', 'py-6');
+            } else {
+                navbar.classList.remove('bg-black/90', 'shadow-lg', 'py-4');
+                navbar.classList.add('bg-transparent', 'py-6');
+            }
+        });
+
+        // Mobile Menu Logic
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const closeMenuBtn = document.getElementById('close-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        function toggleMenu() {
+            mobileMenu.classList.toggle('translate-x-full');
+            document.body.classList.toggle('overflow-hidden');
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMenu);
+        closeMenuBtn.addEventListener('click', toggleMenu);
+
+        // Scroll Reveal Animation (Intersection Observer)
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+    </script>
+</body>
+</html>
